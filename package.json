@@ -18,5 +18,16 @@
   },
   "devDependencies": {
     "jest": "^27.2.5"
-  }
+  },
+  "funFacts": [],
+  "badges": [],
+  "techStacks": [
+    "NodeJS for runtime",
+    "Express for HTTP",
+    "Bcrypt for Hashing",
+    "JsonWebToken for Signing",
+    "Mongoose for Database ORM"
+  ],
+  "publicUrl": "",
+  "screenshots": []
 }
