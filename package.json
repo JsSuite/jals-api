@@ -4,7 +4,7 @@
   "description": "(JALS) - Just a Login System",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "m3yevn",
   "license": "ISC",
@@ -14,5 +14,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.10"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5"
   }
 }

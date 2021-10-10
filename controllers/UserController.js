@@ -1,5 +1,4 @@
 const userModel = require("../models/UserModel");
-const { verifyAuth } = require("../services/AuthService");
 const toJSON = require("../utils/toJSON");
 
 const createUser = async (req, res) => {
@@ -15,11 +14,18 @@ const createUser = async (req, res) => {
 
   await newUser.hashPassword();
   await newUser.save();
-  const createdUser = await userModel
-    .findOne({ _id: newUser._id })
-    .select("-password");
 
-  res.json({
+  const foundUser = await userModel.findOne({ _id: newUser._id });
+
+  if (!foundUser) {
+    return res.status(500).json({
+      message: `Failed user creation`,
+    });
+  }
+
+  const createdUser = foundUser.select("-password");
+
+  res.status(200).json({
     message: `New user ${createdUser.username} is created`,
     details: toJSON(createdUser),
   });
@@ -32,7 +38,7 @@ const getProfile = async (req, res) => {
       message: "Unable to find user account",
     });
   }
-  res.json(toJSON(currentUser));
+  res.status(200).json(toJSON(currentUser));
 };
 
 module.exports = {

@@ -22,16 +22,14 @@ const verifyAuth = (type) => async (req, res, next) => {
     });
   }
 
-  const foundUser = await userModel
-    .findOne({ username: decodedData.username })
-    .select("-password");
+  const foundUser = await userModel.findOne({ username: decodedData.username });
 
   if (!foundUser) {
     return res
       .status(401)
       .json({ message: "Failed Authorization. Invalid credentials" });
   }
-  req.currentUser = foundUser;
+  req.currentUser = foundUser.select("-password");
   next();
 };
 

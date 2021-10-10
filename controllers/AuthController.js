@@ -1,14 +1,14 @@
 const userModel = require("../models/UserModel");
 const bcrypt = require("bcrypt");
-const { signJwt, verifyJwt } = require("../services/AuthService");
+const { signJwt } = require("../services/AuthService");
 const toJSON = require("../utils/toJSON");
 
 const loginUser = async (req, res) => {
-  if (!req.body.username || !req.body.password) {
+  if (!req?.body?.username || !req?.body?.password) {
     return res.status(404).json({
       message: `Invalid body params: ${
-        !req.body.username ? "'username' field is required." : ""
-      } ${!req.body.password ? "'password' field is required." : ""}`,
+        !req?.body?.username ? "'username' field is required." : ""
+      } ${!req?.body?.password ? "'password' field is required." : ""}`,
     });
   }
 
@@ -35,7 +35,7 @@ const loginUser = async (req, res) => {
     3600
   );
 
-  res.json({
+  res.status(200).json({
     message: "Authenticated",
     refresh_token: `Bearer ${refreshToken}`,
     access_token: `Bearer ${accessToken}`,
