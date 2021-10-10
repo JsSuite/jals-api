@@ -40,7 +40,7 @@ describe("AuthController.test.js", () => {
       json: jest.fn(),
     };
     await loginUser(req, res);
-    expect(res.status).toBeCalledWith(404);
+    expect(res.status).toBeCalledWith(400);
   });
 
   it("should not login if passwords didn't match and should throw 401", async () => {

@@ -5,7 +5,7 @@ const toJSON = require("../utils/toJSON");
 
 const loginUser = async (req, res) => {
   if (!req?.body?.username || !req?.body?.password) {
-    return res.status(404).json({
+    return res.status(400).json({
       message: `Invalid body params: ${
         !req?.body?.username ? "'username' field is required." : ""
       } ${!req?.body?.password ? "'password' field is required." : ""}`,

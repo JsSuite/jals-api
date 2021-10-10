@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
   try {
     await newUser.validate();
   } catch (ex) {
-    return res.status(404).json({
+    return res.status(400).json({
       message: ex.message,
     });
   }
@@ -23,11 +23,11 @@ const createUser = async (req, res) => {
     });
   }
 
-  const createdUser = foundUser.select("-password");
+  delete foundUser.password;
 
   res.status(200).json({
-    message: `New user ${createdUser.username} is created`,
-    details: toJSON(createdUser),
+    message: `New user ${foundUser.username} is created`,
+    details: toJSON(foundUser),
   });
 };
 

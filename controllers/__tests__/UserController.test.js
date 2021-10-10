@@ -25,7 +25,7 @@ describe("UserController.test.js", () => {
     };
   });
 
-  it("should not create a user if all required params are not there and will throw 404", async () => {
+  it("should not create a user if all required params are not there and will throw 400", async () => {
     const req = {};
     const res = {
       status: jest.fn().mockImplementation(function () {
@@ -34,7 +34,7 @@ describe("UserController.test.js", () => {
       json: jest.fn(),
     };
     await createUser(req, res);
-    expect(res.status).toBeCalledWith(404);
+    expect(res.status).toBeCalledWith(400);
   });
 
   it("should create a user if all required params are there and will respond 200", async () => {
